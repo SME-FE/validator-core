@@ -7,7 +7,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, './'),
     filename: '../index.js',
-    library: 'validator-core',
+    library: 'Validator',
     libraryTarget: 'umd'
   },
   module: {

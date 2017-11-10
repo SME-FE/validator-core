@@ -4,9 +4,9 @@
 	else if(typeof define === 'function' && define.amd)
 		define([], factory);
 	else if(typeof exports === 'object')
-		exports["validator-core"] = factory();
+		exports["Validator"] = factory();
 	else
-		root["validator-core"] = factory();
+		root["Validator"] = factory();
 })(this, function() {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
@@ -121,6 +121,7 @@ var dateCompare = exports.dateCompare = function dateCompare(value, params, type
   if (type === 'after') return v.getTime() > new Date(params).getTime();
   if (type === 'after_equal') return v.getTime() >= new Date(params).getTime();
   if (type === 'before') return v.getTime() < new Date(params).getTime();
+  /* istanbul ignore else */
   if (type === 'before_equal') return v.getTime() <= new Date(params).getTime();
 };
 
@@ -131,6 +132,7 @@ var numCompare = exports.numCompare = function numCompare(value, params, type) {
   if (type === 'lte') return parseFloat(value) <= parseFloat(params);
   if (type === 'gt') return parseFloat(value) > parseFloat(params);
   if (type === 'gte') return parseFloat(value) >= parseFloat(params);
+  /* istanbul ignore else */
   if (type === 'equal') return parseFloat(value) === parseFloat(params);
 };
 
@@ -162,10 +164,6 @@ var isContain = exports.isContain = function isContain(value, params, type) {
 
 "use strict";
 
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -228,7 +226,7 @@ var Validator = function () {
         };
       }
 
-      var tipSet = this._tips[name];
+      var tipSet = this._tips[name] || ['Error'];
       var tip = tipSet.length === 1 ? tipSet[0] : tipSet[index];
 
       return {
@@ -323,6 +321,7 @@ var Validator = function () {
 }();
 
 exports.default = Validator;
+module.exports = exports['default'];
 
 /***/ }),
 /* 2 */

@@ -1,7 +1,7 @@
 import { getType } from './lib'
 import runPresetRule from './lib/runner'
 
-export default class Validator {
+class Validator {
   constructor (ruleList) {
     this._rules = {}
     this._tips = {}
@@ -122,3 +122,6 @@ export default class Validator {
     return this._runSingleRule(value, rule)
   }
 }
+
+exports.default = Validator
+module.exports = exports['default']
