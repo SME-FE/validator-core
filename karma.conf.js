@@ -43,7 +43,9 @@ module.exports = function (config) {
       dir: 'dist/coverage/',
       reporters: [
         // reporters not supporting the `file` property
-        { type: 'html', subdir: 'report-html' }
+        { type: 'html', subdir: 'report-html' },
+        { type: 'lcovonly', subdir: '.', file: 'report-lcovonly.txt' },
+        { type: 'text-summary', subdir: '.', file: 'text-summary.txt' }
       ]
     },
 

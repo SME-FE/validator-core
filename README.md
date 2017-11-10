@@ -4,16 +4,21 @@ Fast, Lightweight, Flexible Validator.
 
 Only 6KB(min ver) with 100% test coverage, yet powerful and extendable
 
+![Travis branch](https://travis-ci.org/SME-FE/validator-core.svg?branch=master)
+![coverage]()
+![download]()
+![version](https://img.shields.io/npm/v/validator-core.svg)
+[![license](https://img.shields.io/github/license/mashape/apistatus.svg)]()
+
 ## Table of Content
 
-- [Installation an Usage]()
-- [Built-in rules]()
-- [Custom RegExp]()
-- [Custom Function]()
-- [Use with ruleset]()
-- [Check more then one field]()
-- [Api]()
-
+- [Installation an Usage](#installation-an-usage)
+- [Built-in rules](#built-in-rules)
+- [Custom RegExp](#custom-regexp)
+- [Custom Function](#custom-function)
+- [Use with ruleset](#use-with-ruleset)
+- [Check more then one field](#check-more-then-one-field)
+- [Api](#api)
 
 ## Installation an Usage
 
