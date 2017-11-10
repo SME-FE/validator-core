@@ -27,6 +27,16 @@ describe('validator ruleset', function () {
       info(result)
       result.isError.should.be.equal(false)
       result2.isError.should.be.equal(true)
+      result2.tip.should.be.equal('长度为2到24')
+    })
+    it('test color', () => {
+      const result = validator.check('blue', 'Color')
+      const result2 = validator.check('purple', 'Color')
+  
+      info(result)
+      result.isError.should.be.equal(false)
+      result2.isError.should.be.equal(true)
+      result2.tip.should.be.equal('Error')
     })
     it('test email', () => {
       const result = validator.check('hwenleung@gmail.com', 'Email')

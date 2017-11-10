@@ -30,5 +30,9 @@ export const simpleForm = [
     name: 'Price',
     rules: ['required', 'lt:5000'],
     tips: ['错啦错啦']
+  },
+  {
+    name: 'Color',
+    rules: ['required', 'in:blue,red,orange']
   }
 ]

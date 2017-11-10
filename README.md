@@ -5,10 +5,10 @@ Fast, Lightweight, Flexible Validator.
 Only 6KB(min ver) with 100% test coverage, yet powerful and extendable
 
 ![Travis branch](https://travis-ci.org/SME-FE/validator-core.svg?branch=master)
-![coverage]()
-![download]()
+![coverage](https://img.shields.io/coveralls/github/SME-FE/validator-core/master.svg)
+![download](https://img.shields.io/npm/dm/validator-core.svg)
 ![version](https://img.shields.io/npm/v/validator-core.svg)
-[![license](https://img.shields.io/github/license/mashape/apistatus.svg)]()
+![license](https://img.shields.io/badge/license-mit-green.svg)
 
 ## Table of Content
 

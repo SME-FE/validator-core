@@ -31,6 +31,7 @@ export const dateCompare = (value, params, type) => {
   if (type === 'after') return v.getTime() > new Date(params).getTime()
   if (type === 'after_equal') return v.getTime() >= new Date(params).getTime()
   if (type === 'before') return v.getTime() < new Date(params).getTime()
+  /* istanbul ignore else */
   if (type === 'before_equal') return v.getTime() <= new Date(params).getTime()
 }
 
@@ -41,6 +42,7 @@ export const numCompare = (value, params, type) => {
   if (type === 'lte') return parseFloat(value) <= parseFloat(params)
   if (type === 'gt') return parseFloat(value) > parseFloat(params)
   if (type === 'gte') return parseFloat(value) >= parseFloat(params)
+  /* istanbul ignore else */
   if (type === 'equal') return parseFloat(value) === parseFloat(params)
 }
 

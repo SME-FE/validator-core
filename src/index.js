@@ -43,8 +43,8 @@ export default class Validator {
         name: name
       }
     }
-
-    let tipSet = this._tips[name]
+    
+    let tipSet = this._tips[name] || ['Error']
     let tip = tipSet.length === 1
       ? tipSet[0]
       : tipSet[index]
