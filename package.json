@@ -1,21 +1,29 @@
 {
   "name": "validator-core",
   "version": "1.12.1",
-  "description": "fast, lightweight, flexible validator",
+  "description": "Fast, Lightweight, Flexible Validator",
   "main": "index.js",
   "directories": {
   },
   "scripts": {
     "test": "karma start",
     "build": "webpack --config ./build/webpack.prod.config.js",
-    "build:example": "webpack --config ./build/webpack.example.config.js",
-    "dev": "webpack-dev-server --hot --inline --config ./build/webpack.example.config.js --content-base ./dist"
+    "lint": "eslint --ext .js src test"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/SME-FE/validator-core"
+    "url": "git+https://github.com/SME-FE/validator-core"
   },
-  "author": "hwen",
+  "bugs": {
+    "url": "https://github.com/SME-FE/validator-core/issues"
+  },
+  "keywords": [
+    "validator",
+    "validator-core",
+    "validation",
+    "validate"
+  ],
+  "author": "hwen <hwenleung@gmail.com>",
   "license": "MIT",
   "devDependencies": {
     "babel-core": "^6.26.0",

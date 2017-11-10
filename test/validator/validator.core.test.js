@@ -1,4 +1,4 @@
-import { simpleForm } from './../mock/simpleForm'
+import { simpleForm } from './../mock/simple-form'
 import Validation from '@/index'
 import chai from 'chai'
 chai.should()
@@ -11,7 +11,7 @@ describe('validator core', function () {
     // validation.use(simpleForm)
   })
 
-  describe('preset RegExp:', function () {
+  describe('preset RegExp', function () {
     it('required', () => {
       validation.test('', 'required').should.be.equal(false)
       validation.test('x', 'required').should.be.equal(true)
@@ -54,7 +54,7 @@ describe('validator core', function () {
     })
   })
 
-  describe('preset validation function: ', function () {
+  describe('preset validation function', function () {
     it('after', () => {
       validation.test(null, 'after:2017/11/07').should.be.equal(false)
       validation.test('2017/11/08', 'after:2017/11/07').should.be.equal(true)
@@ -173,7 +173,7 @@ describe('validator core', function () {
     })
   })
 
-  describe('validator core test with custom Function: ', function () {
+  describe('validator core test with custom Function', function () {
     it('if prime number', () => {
       function isPrimeNum (num) {
         if (typeof num !== 'number' || !Number.isInteger(num)) return false

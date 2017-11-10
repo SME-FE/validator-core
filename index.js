@@ -4,9 +4,9 @@
 	else if(typeof define === 'function' && define.amd)
 		define([], factory);
 	else if(typeof exports === 'object')
-		exports["sme-router"] = factory();
+		exports["validator-core"] = factory();
 	else
-		root["sme-router"] = factory();
+		root["validator-core"] = factory();
 })(this, function() {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
@@ -240,13 +240,8 @@ var Validator = function () {
     }
 
     /**
-     * 传入校验规则及校验出错的提示
-     * {
-     * name: 'xx',
-     * rules: [],
-     * tips: []
-     * }
-     * @param {*} rule 
+     * Init validator with a set of rule
+     * @param {[Object]} ruleList 
      */
 
   }, {
@@ -262,7 +257,7 @@ var Validator = function () {
     }
 
     /**
-     * 
+     * check with preset ruleset
      * @param {any} value 
      * @param {String} name 
      */
@@ -279,7 +274,7 @@ var Validator = function () {
     }
 
     /**
-     * 
+     * check with different input field
      * @param {[any]|Function|Object} values 
      * @param {[String]?} name 
      * @param {[RegExp]?} diffs 
@@ -310,6 +305,13 @@ var Validator = function () {
 
       throw new TypeError('If the first args is not an Object, then all args should be Array');
     }
+
+    /**
+     * use validator core to run a single test
+     * @param {any} value 
+     * @param {String} ruleName 
+     */
+
   }, {
     key: 'test',
     value: function test(value, ruleName) {

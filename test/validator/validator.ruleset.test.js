@@ -1,4 +1,4 @@
-import { simpleForm } from './../mock/simpleForm'
+import { simpleForm } from './../mock/simple-form'
 import Validation from '@/index'
 import chai from 'chai'
 chai.should()
