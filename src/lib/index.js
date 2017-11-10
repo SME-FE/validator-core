@@ -37,10 +37,10 @@ export const dateCompare = (value, params, type) => {
 export const numCompare = (value, params, type) => {
   if (getType(value) !== 'Number') return false
 
-  if (type === 'max') return parseFloat(value) < parseFloat(params)
-  if (type === 'max_equal') return parseFloat(value) <= parseFloat(params)
-  if (type === 'min') return parseFloat(value) > parseFloat(params)
-  if (type === 'min_equal') return parseFloat(value) >= parseFloat(params)
+  if (type === 'lt') return parseFloat(value) < parseFloat(params)
+  if (type === 'lte') return parseFloat(value) <= parseFloat(params)
+  if (type === 'gt') return parseFloat(value) > parseFloat(params)
+  if (type === 'gte') return parseFloat(value) >= parseFloat(params)
   if (type === 'equal') return parseFloat(value) === parseFloat(params)
 }
 

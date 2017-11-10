@@ -127,10 +127,10 @@ var dateCompare = exports.dateCompare = function dateCompare(value, params, type
 var numCompare = exports.numCompare = function numCompare(value, params, type) {
   if (getType(value) !== 'Number') return false;
 
-  if (type === 'max') return parseFloat(value) < parseFloat(params);
-  if (type === 'max_equal') return parseFloat(value) <= parseFloat(params);
-  if (type === 'min') return parseFloat(value) > parseFloat(params);
-  if (type === 'min_equal') return parseFloat(value) >= parseFloat(params);
+  if (type === 'lt') return parseFloat(value) < parseFloat(params);
+  if (type === 'lte') return parseFloat(value) <= parseFloat(params);
+  if (type === 'gt') return parseFloat(value) > parseFloat(params);
+  if (type === 'gte') return parseFloat(value) >= parseFloat(params);
   if (type === 'equal') return parseFloat(value) === parseFloat(params);
 };
 
@@ -275,7 +275,7 @@ var Validator = function () {
 
     /**
      * check with different input field
-     * @param {[any]|Function|Object} values 
+     * @param {[any]|Object} values 
      * @param {[String]?} name 
      * @param {[RegExp]?} diffs 
      */
@@ -309,13 +309,13 @@ var Validator = function () {
     /**
      * use validator core to run a single test
      * @param {any} value 
-     * @param {String} ruleName 
+     * @param {String} rule 
      */
 
   }, {
     key: 'test',
-    value: function test(value, ruleName) {
-      return this._runSingleRule(value, ruleName);
+    value: function test(value, rule) {
+      return this._runSingleRule(value, rule);
     }
   }]);
 
@@ -405,17 +405,17 @@ var presetRules = exports.presetRules = {
     return len <= params[1] && len >= params[0];
   },
   // number
-  max: function max(value, params) {
-    return (0, _index.numCompare)(value, params, 'max');
+  gt: function gt(value, params) {
+    return (0, _index.numCompare)(value, params, 'gt');
   },
-  max_equal: function max_equal(value, params) {
-    return (0, _index.numCompare)(value, params, 'max_equal');
+  gte: function gte(value, params) {
+    return (0, _index.numCompare)(value, params, 'gte');
   },
-  min: function min(value, params) {
-    return (0, _index.numCompare)(value, params, 'min');
+  lt: function lt(value, params) {
+    return (0, _index.numCompare)(value, params, 'lt');
   },
-  min_equal: function min_equal(value, params) {
-    return (0, _index.numCompare)(value, params, 'min_equal');
+  lte: function lte(value, params) {
+    return (0, _index.numCompare)(value, params, 'lte');
   },
   equal: function equal(value, params) {
     return (0, _index.numCompare)(value, params, 'equal');

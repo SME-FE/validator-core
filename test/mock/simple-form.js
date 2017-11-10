@@ -8,12 +8,12 @@ export const simpleForm = [
   {
     name: 'EnglishName',
     rules: ['required', 'size:2-24', /^[a-zA-Z\s]+$/],
-    tips: ['Required', 'Name should have 2-24 letter', 'Not a valid English Name']
+    tips: ['Required...', 'Should have 2-24 letter', 'Not a valid English Name']
   },
   {
     name: 'Age',
     optional: true,
-    rules: ['min:18'],
+    rules: ['gt:18'],
     tips: ['age should be large then 18']
   },
   {
@@ -28,7 +28,7 @@ export const simpleForm = [
   },
   {
     name: 'Price',
-    rules: ['required', 'max:5000'],
+    rules: ['required', 'lt:5000'],
     tips: ['错啦错啦']
   }
 ]

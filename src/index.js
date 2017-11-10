@@ -87,7 +87,7 @@ export default class Validator {
 
   /**
    * check with different input field
-   * @param {[any]|Function|Object} values 
+   * @param {[any]|Object} values 
    * @param {[String]?} name 
    * @param {[RegExp]?} diffs 
    */
@@ -116,9 +116,9 @@ export default class Validator {
   /**
    * use validator core to run a single test
    * @param {any} value 
-   * @param {String} ruleName 
+   * @param {String} rule 
    */
-  test (value, ruleName) {
-    return this._runSingleRule(value, ruleName)
+  test (value, rule) {
+    return this._runSingleRule(value, rule)
   }
 }

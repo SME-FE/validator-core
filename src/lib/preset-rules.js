@@ -22,10 +22,10 @@ export const presetRules = {
     return len <= params[1] && len >= params[0]
   },
   // number
-  max: (value, params) => numCompare(value, params, 'max'),
-  max_equal: (value, params) => numCompare(value, params, 'max_equal'),
-  min: (value, params) => numCompare(value, params, 'min'),
-  min_equal: (value, params) => numCompare(value, params, 'min_equal'),
+  gt: (value, params) => numCompare(value, params, 'gt'),
+  gte: (value, params) => numCompare(value, params, 'gte'),
+  lt: (value, params) => numCompare(value, params, 'lt'),
+  lte: (value, params) => numCompare(value, params, 'lte'),
   equal: (value, params) => numCompare(value, params, 'equal'),
 
   in: (value, params) => isContain(value, params, 'in'),
