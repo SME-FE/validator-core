@@ -18,7 +18,7 @@ Only 6KB(min ver) with 100% test coverage, yet powerful and extendable
 - [Custom Function](#custom-function)
 - [Use with ruleset](#use-with-ruleset)
 - [Check more then one field](#check-more-then-one-field)
-- [Api](#api)
+- [API](#api)
 
 ## Installation an Usage
 
@@ -388,7 +388,7 @@ language = 'en'
 validator.checkWithDiff(diffFn(language, data))
 ```
 
-## Api
+## API
 
 Create an validator instance.
 
