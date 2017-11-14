@@ -290,10 +290,13 @@ validator.test(8, isPrimeNum) // => false
 ## Use with ruleset
 
 ```js
+// ruleSet must be an Object Array
 const ruleSet = [
   {
-    name: 'Email',
+    name: 'Email', // rule should have a unique name
+    // set of rules will be checked in order
     rules: ['required', 'email', 'size:32'],
+    // tips are one-to-one of the rules, but you can set only one tip like 'Price'
     tips: ['Required...', 'Not a valid Email', 'Email address too long']
   },
   {
