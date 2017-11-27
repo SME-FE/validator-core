@@ -1,5 +1,6 @@
 import { getType } from './lib'
 import runPresetRule from './lib/runner'
+import customRules from './lib/custom-rules'
 
 class Validator {
   constructor (ruleList) {
@@ -120,6 +121,10 @@ class Validator {
    */
   test (value, rule) {
     return this._runSingleRule(value, rule)
+  }
+
+  registerRules (rules) {
+    customRules.add(rules)
   }
 }
 

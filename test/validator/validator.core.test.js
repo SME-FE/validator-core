@@ -204,13 +204,15 @@ describe('validator core', function () {
       const testSuit = () => validator.test('some', 'hallo')
       testSuit.should.to.throw('hallo')
       const testSuit2 = () => validator.test('some', '')
-      testSuit2.should.to.throw('can not parse rule of undefined')
+      testSuit2.should.to.throw('Can not parse rule of undefined')
     })
     it('unsupport custome rule type', () => {
       const testSuit = () => validator.test('some', [])
       testSuit.should.to.throw(TypeError)
       const testSuit2 = () => validator.test('some', true)
       testSuit2.should.to.throw(TypeError)
+      const testSuit3 = () => validator.test('some', 'xxx')
+      testSuit3.should.to.throw('Does not has the rule')
     })
     it('not a valid date', () => {
       validator.test('2017-13-02', 'after:2017-12-01').should.be.equal(false)
