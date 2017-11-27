@@ -19,7 +19,7 @@ class CustomRule {
     if (getType(rules) !== 'Object') throw new Error('Custom rules must be Object')
     for (let key in rules) {
       if (getType(rules[key]) !== 'RegExp' && getType(rules[key]) !== 'Function') {
-        throw new Error(`Rule [${key}] must be Function or RegExp`)
+        throw new TypeError(`Rule [${key}] must be Function or RegExp`)
       }
     }
   }

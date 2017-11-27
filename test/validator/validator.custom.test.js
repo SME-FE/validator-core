@@ -52,6 +52,7 @@ describe('validator core', function () {
       const testSuit2 = () => validator.registerRules({
         ecc: '66666'
       })
+      testSuit2.should.to.throw(TypeError)
       testSuit2.should.to.throw('Rule [ecc] must be Function or RegExp')
     })
   })
