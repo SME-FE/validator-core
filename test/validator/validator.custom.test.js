@@ -32,11 +32,11 @@ describe('validator core', function () {
   })
 
   describe('custom preset rules', function () {
-    it('password', () => {
+    it('custom regexp rule', () => {
       validator.test('abcd123', 'password').should.be.equal(false)
       validator.test('abcd1234', 'password').should.be.equal(true)
     })
-    it('prime number', () => {
+    it('custom function rule', () => {
       validator.test(13, 'is_prime:just_test,hei').should.be.equal(true)
       validator.test(24, 'is_prime').should.be.equal(false)
     })
