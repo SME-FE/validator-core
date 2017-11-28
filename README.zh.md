@@ -10,29 +10,31 @@ Only 6KB(min ver) with 100% test coverage, yet powerful and extendable
 ![version](https://img.shields.io/npm/v/validator-core.svg)
 ![license](https://img.shields.io/badge/license-mit-green.svg)
 
-- [中文文档](https://github.com/SME-FE/validator-core/blob/master/README.zh.md)
+- [English doc](https://github.com/SME-FE/validator-core/blob/master/README.md)
 
-## Table of Content
+## 目录
 
-- [Installation an Usage](#installation-an-usage)
-- [Built-in rules](#built-in-rules)
-- [Register custom rules](#register-custom-rules)
-- [Logical operators](#logical-operators)
-- [Custom RegExp](#custom-regexp)
-- [Custom Function](#custom-function)
-- [Use with ruleset](#use-with-ruleset)
-- [Check more then one field](#check-more-then-one-field)
+- [安装和使用](#安装和使用)
+- [内置规则](#内置规则)
+- [注册内置规则](#注册内置规则)
+- [逻辑操作符](#逻辑操作符)
+- [自定义正则](#自定义正则)
+- [自定义方法](#自定义方法)
+- [使用一组规则校验](#使用一组规则校验)
+- [联动检查多个表单 field](#联动检查多个表单 field)
 - [API](#api)
 
-## Installation an Usage
+## 安装和使用
 
-### install
+### 安装
+
+通过 npm
 
 ```s
 npm install --save validator-core
 ```
 
-### usage
+### 用法
 
 ```js
 const Validator = require('validator-core')
@@ -42,7 +44,7 @@ import Validator from 'validator-core'
 const validator = new Validator()
 ```
 
-loaded as a standalone script
+使用标签方式加载
 
 ```html
 <script src="validator.core.min.js"></script>
@@ -52,9 +54,9 @@ loaded as a standalone script
 </script>
 ```
 
-## Built-in rules
+## 内置规则
 
-Before use it
+使用前，先引入
 
 ```js
 import Validator from 'validator-core'
@@ -258,10 +260,14 @@ const validator = new Validator()
 
 </details>
 
-## Register custom rules
+## 注册内置规则
 
-you can add custom rules to validator by `registerRules(rules)` method.
-The `rules` must be an Object like
+可以通过 `registerRules(rules)` 方法来注册内置的规则，从而进行扩展。
+有两点需要注意
+
+- 在使用新增的规则前，必须先注册。
+
+- 自定义的新规则名跟原内置规则名重复，则自定义规则会被忽略（即原内置的规则优先级最高）
 
 ```js
 {
