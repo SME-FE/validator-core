@@ -277,7 +277,7 @@ The `rules` must be an Object like
 - example
 
 ```js
-const validator = new Validator(simpleForm)
+const validator = new Validator()
 const customRules = {
   'password': /^[^\s\u4E00-\u9FA5]{8,16}$/,
   'is_prime': function isPrimeNum (num, params) {
