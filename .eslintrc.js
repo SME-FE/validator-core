@@ -21,6 +21,7 @@ module.exports = {
       "no-unused-vars": 1,
       "eqeqeq": 1,
       "no-trailing-spaces": 0,
+      "no-new-func": 1,
       // allow debugger during development
       'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0
     }

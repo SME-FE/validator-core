@@ -11,7 +11,7 @@ describe('validator core', function () {
     const customRules = {
       'password': /^[^\s\u4E00-\u9FA5]{8,16}$/,
       'is_prime': function isPrimeNum (num, params) {
-        info(params)
+        if (params) info(params)
         if (typeof num !== 'number' || !Number.isInteger(num)) return false
       
         if (num === 2) {
@@ -39,6 +39,17 @@ describe('validator core', function () {
     it('custom function rule', () => {
       validator.test(13, 'is_prime:just_test,hei').should.be.equal(true)
       validator.test(24, 'is_prime').should.be.equal(false)
+    })
+  })
+
+  describe('multi rules', function () {
+    it('custom multi rule', () => {
+      // validator.test(50, 'gt:20 && lt: 60').should.be.equal(true)
+      // validator.test(61, 'gt:20 && lt: 60').should.be.equal(false)
+      // validator.test(19, 'gt:20 && lt: 60').should.be.equal(false)
+      validator.test(13, 'lt:20 || gt: 60 && is_prime').should.be.equal(true)
+      validator.test(23, 'lt:20 || gt: 60 && is_prime').should.be.equal(false)
+      validator.test(797, 'lt:20 || gt: 60 && is_prime').should.be.equal(true)
     })
   })
 
