@@ -199,6 +199,32 @@ describe('validator core', function () {
     })
   })
 
+  describe('multi rules', function () {
+    it('built in multi rule', () => {
+      validator.test(50, 'gt:20 && lt: 60').should.be.equal(true)
+      validator.test(61, 'gt:20 && lt: 60').should.be.equal(false)
+      validator.test(19, 'gt:20 && lt: 60').should.be.equal(false)
+      validator.test(50, 'lt:20 || gt: 60').should.be.equal(false)
+      validator.test(61, 'lt:20 || gt: 60').should.be.equal(true)
+      validator.test(19, 'lt:20 || gt: 60').should.be.equal(true)
+      validator.test(61, 'in:51,61 && gt:60').should.be.equal(true)
+      validator.test(51, 'in:51,61 && gt:60').should.be.equal(false)
+      validator.test(51, 'in:51,61 || gt:60').should.be.equal(true)
+      validator.test(51, '(gt:20 && lt:60) || (in:71,81,91 && not_in:81)').should.be.equal(true)
+      validator.test(71, '(gt:20 && lt:60) || (in:71,81,91 && not_in:81)').should.be.equal(true)
+      validator.test(81, '(gt:20 && lt:60) || (in:71,81,91 && not_in:81)').should.be.equal(false)
+      validator.test(12, '(gt:20 && lt:60) || (in:71,81,91 && not_in:81)').should.be.equal(false)
+      validator.test(70, '(gt:20 && lt:60) || (in:71,81,91 && not_in:81)').should.be.equal(false)
+      /**
+       * 😂😭
+       * It work if you wrote it in ungly way...
+       * but I suggest you not to write something like this
+       */
+      validator.test(70, '( gt:20 &&  lt:    60) || (       in:71,81  ,91 && not_in:81)     ').should.be.equal(false)
+      validator.test(71, '( gt:20 &&  lt:    60) || (       in:71,81  ,91 && not_in:81)     ').should.be.equal(true)
+    })
+  })
+
   describe('validator core exception', function () {
     it('string that not built in rule', () => {
       const testSuit = () => validator.test('some', 'hallo')

@@ -26,6 +26,16 @@ describe('validator core', function () {
         }
       
         return true
+      },
+      'contain': function (value, params) {
+        if (!params) return false
+        if (typeof value !== 'string') return false
+
+        for (let i = 0; i < params.length; i++) {
+          const item = params[i]
+          if (value.indexOf(item) > -1) return true
+        }
+        return false
       }
     }
     validator.registerRules(customRules)
@@ -44,12 +54,17 @@ describe('validator core', function () {
 
   describe('multi rules', function () {
     it('custom multi rule', () => {
-      // validator.test(50, 'gt:20 && lt: 60').should.be.equal(true)
-      // validator.test(61, 'gt:20 && lt: 60').should.be.equal(false)
-      // validator.test(19, 'gt:20 && lt: 60').should.be.equal(false)
+      validator.test('hwenleung@gmail.com', 'email && contain:gmail.com').should.be.equal(true)
+      validator.test('hwenleung@163.com', 'email && contain:gmail.com').should.be.equal(false)
+
       validator.test(13, 'lt:20 || gt: 60 && is_prime').should.be.equal(true)
       validator.test(23, 'lt:20 || gt: 60 && is_prime').should.be.equal(false)
       validator.test(797, 'lt:20 || gt: 60 && is_prime').should.be.equal(true)
+      validator.test(4, 'lt:20 || (gt: 60 && is_prime)').should.be.equal(true)
+      validator.test(64, 'lt:20 || (gt: 60 && is_prime)').should.be.equal(false)
+      validator.test(797, 'lt:20 || (gt: 60 && is_prime)').should.be.equal(true)
+      validator.test(13, '((lt:20 || gt: 60) && is_prime)').should.be.equal(true)
+      validator.test(23, '((lt:20 || gt: 60) && is_prime)').should.be.equal(false)
     })
   })
 

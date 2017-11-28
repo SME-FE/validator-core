@@ -17,7 +17,7 @@ class Validator {
     } else if (getType(rule) === 'String') {
       return runPresetRule(rule, value)
     } else {
-      if (getType(rule) !== 'RegExp') throw new TypeError('rule type error!! rule type must be function or RegExp or String!')
+      if (getType(rule) !== 'RegExp') throw new TypeError('rule type error!! rule type must be Function or RegExp or String!')
 
       return rule.test(value)
     }
@@ -123,6 +123,11 @@ class Validator {
     return this._runSingleRule(value, rule)
   }
 
+  /**
+   * register rules to preset rules
+   * @param {Object} rules 
+   * @memberof Validator
+   */
   registerRules (rules) {
     customRules.add(rules)
   }

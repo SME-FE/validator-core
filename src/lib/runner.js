@@ -3,7 +3,7 @@ import { presetRules } from './preset-rules'
 import customRules from './custom-rules'
 
 const runRule = (queryStr, value) => {
-  let [ruleName, params] = queryStr.split(':').map(s => s.trim())
+  let [ruleName, params] = queryStr.split(':')
   let customFnKey = ''
   const rule = presetRules[ruleName] || customRules.get(ruleName)
   if (!rule) throw new Error(`Does not has the rule ${ruleName}`)
@@ -29,33 +29,43 @@ const runRule = (queryStr, value) => {
 }
 
 const runMultiRule = (queryStr, value) => {
-  const orArr = queryStr.split('||')
-  console.info('orArr:')
-  console.info(orArr)
-  console.info('andArr')
+  const parse = logicalStr => {
+    const orArr = logicalStr.split('||')
+    const parsedStr = orArr.map(oStr => {
+      if (!oStr) return ''
+      if (/&&/.test(oStr)) {
+        const andArr = oStr.split('&&')
+        return andArr.map(aStr => {
+          if (!aStr) return ''
+          return runRule(aStr, value)
+        }).join('&&')
+      } else {
+        return runRule(oStr, value)
+      }
+    }).join('||')
+    return parsedStr
+  }
 
-  const parsedStr = orArr.map(oStr => {
-    oStr = oStr.trim()
-    if (/&&/.test(oStr)) {
-      const andArr = oStr.split('&&')
-      console.info(andArr)
-      return andArr.map(aStr => {
-        aStr = aStr.trim()
-        return runRule(aStr, value)
-      }).join('&&')
-    } else {
-      return runRule(oStr, value)
-    }
-  }).join('||')
+  let resultStr
+  if (queryStr.indexOf('(') > -1) {
+    const leftBrac = queryStr.split('(')
+    resultStr = leftBrac.map(lbStr => {
+      const rightBrac = lbStr.split(')')
+      return rightBrac.map(rbStr => {
+        return parse(rbStr)
+      }).join(')')
+    }).join('(')
+  } else {
+    resultStr = parse(queryStr)
+  }
 
-  console.info('parsedStr:')
-  console.info(parsedStr)
-  return new Function(`return ${parsedStr}`)()
+  return new Function(`return ${resultStr};`)()
 }
 
 export default function runPresetRule (queryStr, value) {
   if (!queryStr) throw new Error('Can not parse rule of undefined')
 
+  queryStr = queryStr.replace(/\s/g, '')
   if (/&&|\|\|/.test(queryStr)) {
     return runMultiRule(queryStr, value)
   } else {
