@@ -14,6 +14,8 @@ Only 6KB(min ver) with 100% test coverage, yet powerful and extendable
 
 - [Installation an Usage](#installation-an-usage)
 - [Built-in rules](#built-in-rules)
+- [Register custom rules](#register-custom-rules)
+- [Logical operators](#logical-operators)
 - [Custom RegExp](#custom-regexp)
 - [Custom Function](#custom-function)
 - [Use with ruleset](#use-with-ruleset)
@@ -254,6 +256,89 @@ const validator = new Validator()
 
 </details>
 
+## Register custom rules
+
+you can add custom rules to validator by `registerRules(rules)` method.
+The `rules` must be an Object like
+
+```js
+{
+  'rule1': RegExp,
+  /**
+   *  while using function you can pass params
+   *  the first argment of function is `value` which should be tested
+   *  the second argment is an array, It is pass by rule2:params1, params2, params3
+   *  In this case the second argment should be [params1, params2, params3]
+  **/
+  'rule2': Function
+}
+```
+
+- example
+
+```js
+const validator = new Validator(simpleForm)
+const customRules = {
+  'password': /^[^\s\u4E00-\u9FA5]{8,16}$/,
+  'is_prime': function isPrimeNum (num, params) {
+    if (params) console.log(params)
+    if (typeof num !== 'number' || !Number.isInteger(num)) return false
+
+    if (num === 2) {
+      return true
+    } else if (num % 2 === 0) {
+      return false
+    }
+
+    const squareRoot = Math.sqrt(num)
+    for (var i = 3; i <= squareRoot; i += 2) {
+      if (num % i === 0) return false
+    }
+
+    return true
+  },
+  'contain': function (value, params) {
+    if (!params) return false
+    if (typeof value !== 'string') return false
+
+    for (let i = 0; i < params.length; i++) {
+      const item = params[i]
+      if (value.indexOf(item) > -1) return true
+    }
+    return false
+  }
+}
+
+validator.registerRules(customRules)
+
+validator.test('abcd123', 'password') // => false
+validator.test('abcd1234', 'password') // => true
+validator.test(13, 'is_prime:just_test,hei')
+// log: ['just_test', 'hei']
+// => true
+validator.test(24, 'is_prime') // => false
+```
+
+## Logical operators
+
+you can use preset rules with logical operators.
+let's continue with the example of [Register custom rules](#register-custom-rules)
+
+```js
+validator.test('hwenleung@gmail.com', 'email && contain:gmail.com, qq.com') // => true
+validator.test('hwenleung@163.com', 'email && contain:gmail.com, qq.com') // => false
+validator.test('hwenleung@qq.com', 'email && contain:gmail.com, qq.com') // => true
+
+validator.test(13, 'lt:20 || gt: 60 && is_prime') // => true
+validator.test(23, 'lt:20 || gt: 60 && is_prime') // => false
+validator.test(797, 'lt:20 || gt: 60 && is_prime') // => true
+validator.test(4, 'lt:20 || (gt: 60 && is_prime)') // => true
+validator.test(64, 'lt:20 || (gt: 60 && is_prime)') // => false
+validator.test(797, 'lt:20 || (gt: 60 && is_prime)') // => true
+validator.test(13, '((lt:20 || gt: 60) && is_prime)') // => true
+validator.test(23, '((lt:20 || gt: 60) && is_prime)') // => false
+```
+
 ## Custom RegExp
 
 ```js
@@ -397,40 +482,48 @@ import Validator from 'validator-core'
 const validator = new Validator()
 ```
 
-### Methods
-
-#### Validator(ruleSet)
+### Validator(ruleSet)
 
 init validator instance with ruleSet
 
-#### Params
+**Params**
 
 - {[Object]} ruleSet
 
-#### validator.test(value, rule)
+### validator.test(value, rule)
 
 use built-in rule or RegExp, Function to test value
 
-#### Params
+**Params**
 
 - {any} value - value to test
 - {String | RegExp | Function} rule
 
 #### Return Boolean
 
-#### validator.use(ruleSet)
+### validator.registerRules(rules)
+
+add rules to built-in preset rules
+
+**Params**
+
+- {Object} rules - add rules to preset rules
+
+#### Return undefined
+
+### validator.use(ruleSet)
 
 add ruleSet to validator
 
-#### Params
+**Params**
 
 - {[Object]} ruleSet
 
-#### validator.check(value, ruleName)
+### validator.check(value, ruleName)
 
 check by ruleSet
 
-#### Params
+**Params**
 
 - {any} value - value to check
 - {String} ruleName - ruleName fo ruleSet
@@ -442,11 +535,11 @@ check by ruleSet
 - ruleName
 - tip - error tip
 
-#### validator.checkWithDiff(values, ruleNames, diffs)
+### validator.checkWithDiff(values, ruleNames, diffs)
 
 check if one field rule will be affected by other field
 
-#### Params
+**Params**
 
 - {[any] | Object} value - value to check
 - {[String]} ruleNames - list of ruleNames
