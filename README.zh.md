@@ -19,9 +19,9 @@ Only 6KB(min ver) with 100% test coverage, yet powerful and extendable
 - [注册内置规则](#注册内置规则)
 - [逻辑操作符](#逻辑操作符)
 - [自定义正则](#自定义正则)
-- [自定义方法](#自定义方法)
+- [自定义函数](#自定义函数)
 - [使用一组规则校验](#使用一组规则校验)
-- [联动检查多个表单 field](#联动检查多个表单 field)
+- [联动检查多个表单 field](#联动检查多个表单-field)
 - [API](#api)
 
 ## 安装和使用
@@ -273,10 +273,12 @@ const validator = new Validator()
 {
   'rule1': RegExp,
   /**
-   *  while using function you can pass params
-   *  the first argment of function is `value` which should be tested
-   *  the second argment is an array, It is pass by rule2:params1, params2, params3
-   *  In this case the second argment should be [params1, params2, params3]
+   * 当 rule 为函数时，有两个参数 rule(value, params)
+   * 以 rule2 为例，`validator.test(value1, 'rule2:p1,p2,p3')`
+   * rule2 函数接受到的参数为
+   * value -> value1
+   * params -> [p1, p2, p3]
+   *
   **/
   'rule2': Function
 }
@@ -327,10 +329,10 @@ validator.test(13, 'is_prime:just_test,hei')
 validator.test(24, 'is_prime') // => false
 ```
 
-## Logical operators
+## 逻辑运算符
 
-you can use preset rules with logical operators.
-let's continue with the example of [Register custom rules](#register-custom-rules)
+内置的规则可以用逻辑运算符进行连接，从而进行更复杂的判断。
+从 [Register custom rules](#register-custom-rules) 例子里的代码继续
 
 ```js
 validator.test('hwenleung@gmail.com', 'email && contain:gmail.com, qq.com') // => true
@@ -347,7 +349,7 @@ validator.test(13, '((lt:20 || gt: 60) && is_prime)') // => true
 validator.test(23, '((lt:20 || gt: 60) && is_prime)') // => false
 ```
 
-## Custom RegExp
+## 自定义正则
 
 ```js
 validator.test('=3=', /=3=/) // => true
@@ -355,7 +357,7 @@ validator.test('=3=o', /=3=/) // => true
 validator.test('=3=o', /=3=$/) // => false
 ```
 
-## Custom Function
+## 自定义方法
 
 ```js
 function isPrimeNum (num) {
@@ -380,7 +382,7 @@ validator.test(991, isPrimeNum) // => true
 validator.test(8, isPrimeNum) // => false
 ```
 
-## Use with ruleset
+## 使用一组规则校验
 
 ```js
 // ruleSet must be an Object Array
@@ -425,7 +427,7 @@ console.log(validator.check(price, 'Price'))
 // => {isError: false, isPass: true, name: 'Price'}
 ```
 
-## Check more then one field
+## 联动检查多个表单 field
 
 ```js
 const ruleSet = [
