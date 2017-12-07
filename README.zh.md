@@ -47,7 +47,7 @@ const validator = new Validator()
 使用标签方式加载
 
 ```html
-<script src="validator.core.min.js"></script>
+<script src="https://unpkg.com/validator-core"></script>
 <script type="text/javascript">
   const validator = new Validator()
   validator.test('hwenleung@gmail.com', 'email') // => true
