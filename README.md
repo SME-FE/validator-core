@@ -12,9 +12,9 @@ Only 6KB(min ver) with 100% test coverage, yet powerful and extendable
 
 - [中文文档](https://sme-fe.github.io/website-validator/zh/guide/install-and-usage.html)
 
-## Documents
+## Documentation
 
-[checkout docs](https://sme-fe.github.io/website-validator/)
+- [Guide](https://sme-fe.github.io/website-validator/)
 
 ## Installation an Usage
 
