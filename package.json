@@ -1,6 +1,6 @@
 {
   "name": "validator-core",
-  "version": "1.13.3",
+  "version": "1.13.4",
   "description": "Fast, Lightweight, Flexible Validator",
   "main": "index.js",
   "directories": {},
