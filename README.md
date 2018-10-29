@@ -2,7 +2,7 @@
 
 Fast, Lightweight, Flexible Validator.
 
-Only 6KB(min ver) with 100% test coverage, yet powerful and extendable
+Only 2.7KB(after gzip) with 100% test coverage, yet powerful and extendable
 
 ![Travis branch](https://travis-ci.org/SME-FE/validator-core.svg?branch=master)
 ![coverage](https://img.shields.io/coveralls/github/SME-FE/validator-core/master.svg)
